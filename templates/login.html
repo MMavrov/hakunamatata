@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head> 
+    <title> [content.login-title] </title>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/style.css"/>
+  </head>
+  <body>
+  
+  <div class="container-fluid">
+
+    <div class="row-fluid">
+    <h1 style="padding-top: 20px; font-size: 500%; text-align: center; font-family: fantasy; color:#FFFACD"> 
+        [content.login-greeting]
+    </h1>
+
+    <div class="hero-unit span6 offset3 centering well"> 
+    <form class="form-horizontal" action="login.php" method="POST">
+        <div class="control-group">
+            <label class="control-label" for="inputUsername">[content.login-username]</label>
+            <div class="controls">
+                <input type="text" id="inputUsername" name="username" placeholder="Username..." />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputPassword">[content.login-password]</label>
+            <div class="controls">
+                <input type="password" id="inputPassword" name="password" placeholder="Password..." />
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn">[content.login-loginBtn]</button>
+                <a href="register.php" class="btn btn-danger"> [content.login-register]</a>
+            </div>
+        </div>
+        [variables.error]
+    </form>
+    </div>
+    </div>
+    </div>
+</body>
+</html>
+
+

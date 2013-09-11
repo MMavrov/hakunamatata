@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/colorbox_messages.css" />
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/style.css"/>
+</head>
+<body>	
+
+<div class="hero-unit span5 centering well" style="float:left">
+    <div class="control-group">
+        <div class="controls">
+            <div>
+                <textarea type="text" style="width: 70%; height: 25px; float: left" placeholder="[content.people-searchPlaceholder]"></textarea>
+                <button type="button" class="btn btn-default btn-small; float: right">[content.people-searchBtn]</button>
+                <!--при цъкане на search, friends-таблицата става people със съответната променена информация-->
+            </div>
+            <table class="table" style="font-family: cursive">
+            	<div>
+                <caption style="font-weight: 900; font-size: x-large; width: 100%">[content.people-peopleTitle]</caption>
+                <thead>
+                    <tr>
+                        <th>[content.people-userLabel]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    [variables.tablebody] 
+                </tbody>
+                </div>  
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
+

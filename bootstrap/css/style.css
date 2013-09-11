@@ -1,0 +1,44 @@
+html,
+body{
+   height:100%;
+   margin:0;
+   padding:0
+}
+
+body {
+   background-image: url("/hakuna matata/background.jpg")
+}
+
+.homepage-menu{
+  height: 50%;
+  width: 20px;
+}
+
+.container-fluid{
+   height:100%;
+   display:table;
+   width: 100%;
+   padding: 0;
+}
+ 
+.row-fluid {
+   height: 100%;
+   width: 100%;
+   display: table-cell;
+   vertical-align: middle;
+}
+   
+.centering {
+    float:none;
+    margin:0 auto;
+}
+
+textarea {
+   resize: none;
+   color: #B0D1E8;
+   background-color: #324876;
+   border-width: 1px;
+   border-color: #000000;
+   border-style: solid;
+}
+

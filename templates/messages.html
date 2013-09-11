@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/colorbox_messages.css" />
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/style.css"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script>
+	function readMessage(messageId){
+		$("#btn"+messageId).attr("class", "btn btn-success");
+		$("#btn"+messageId).html("Seen message");
+		$.ajax({
+		   type: "POST",
+		   url: "changeMessageStatus.php",
+		   data: "messageId="+messageId,
+		   success: function(text){
+		   		$("#messageTextarea").val($.trim(text));
+		   }
+		 });
+	}
+</script>
+</head>
+<body>	
+	<div style="background-image: url(hakuna matata/background.jpg)">
+	<div class="hero-unit span3 centering well" style="float:left">
+	    <div class="control-group">
+	        <div class="controls">
+	            <table class="table" style="font-family: cursive">
+	                <caption style="font-weight: 900; font-size: x-large; width: 100%">[content.messages-title]</caption>
+	                <thead>
+	                    <tr>
+	                        <th>[content.messages-message]</th>
+	                        <th>[content.messages-from]</th>    
+	                    </tr>
+	                    
+	                </thead>
+	                <tbody>
+	                    [variables.tablebody]
+	                </tbody>
+	            </table>
+	        </div>
+	    </div>
+	</div>
+
+	<div class="hero-unit span5 centering well" style="float:right">
+		<div class="control-group">
+			<div class="controls">
+	            <span class="label label-info">Info</span>
+	            <div class="controls">
+	                <textarea id="messageTextarea" style="width: 100%" type="text" placeholder="[content.messages-chooseMessage]"></textarea>
+	            </div>
+        	</div>
+		</div>
+	</div>
+</div>
+</body>
+
+</html>
+

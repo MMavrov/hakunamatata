@@ -1,0 +1,42 @@
+<?php
+//class containing user data and methods
+	require_once('include/session.php');
+	require_once('include/db.php');
+	class user{
+		public $hasData = false;
+		public $userId;
+		public $userName;
+		public $firstName;
+		public $lastName;
+		public $email;
+		public $lang;
+		public $perm;
+		public static function checkUserLoggedIn(){
+			global $pdo;
+			global $session;
+			$stm = $pdo -> prepare('SELECT * FROM login WHERE uSess = :session');
+			$stm -> execute(array(':session' => $session));
+			return ($stm -> rowCount() === 1);
+		}
+		public function getUserData(){
+			global $pdo;
+			global $session;
+			if (self::checkUserLoggedIn()){
+				$stm = $pdo -> prepare('SELECT f1.uId,f1.uName,f2.firstName,f2.lastName,f2.email,f2.lang,f2.perm FROM login AS f1 JOIN users AS f2 ON f1.uId = f2.uId WHERE uSess = :session');
+				$stm -> execute(array(':session' => $session));
+				$result = $stm->fetch();
+				$this -> userId    = $result[0];
+				$this -> username  = $result[1];
+				$this -> firstName = $result[2];
+				$this -> lastName  = $result[3];
+				$this -> email     = $result[4];
+				$this -> lang      = $result[5];
+				$this -> perm      = $result[6];
+				$this -> hasData   = true;
+			}
+		}
+		public function __construct(){
+			$this -> getUserData();
+		}
+	}
+?>

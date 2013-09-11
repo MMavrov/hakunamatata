@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title> [content.homepage-title] </title>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/style.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="colorbox/jquery.colorbox.js"></script>
+    <script>
+            $(document).ready(function(){
+                //Examples of how to assign the Colorbox event to elements
+                $(".group1").colorbox({rel:'photosGroup'});
+                $(".ajax").colorbox();
+                $(".php").colorbox();
+                $(".callbacks").colorbox({
+                    onOpen:function(){ alert('onOpen: colorbox is about to open'); },
+                    onLoad:function(){ alert('onLoad: colorbox has started to load the targeted content'); },
+                    onComplete:function(){ alert('onComplete: colorbox has displayed the loaded content'); },
+                    onCleanup:function(){ alert('onCleanup: colorbox has begun the close process'); },
+                    onClosed:function(){ alert('onClosed: colorbox has completely closed'); }
+                });
+                
+                newMessages();
+            });
+
+            setInterval(function(){
+                            refreshGossips(); 
+                  //          newMessages();
+                        }, 2000);
+
+            function refreshGossips(){
+                $.ajax({
+                    type: "POST",
+                    url: "getFeeds.php",
+                    success: function(gossips){
+                        $('#gossipTableBody').html($.trim(gossips));
+                    }
+                });
+            }
+
+            function newMessages(){
+
+                $.ajax({
+                    type: "POST",
+                    url: "newMessages.php",
+                    success: function(messageAnswer){
+                        if(messageAnswer == 1){
+                            //alert($('#messagesBtn').attr("class"));
+                            $('#messagesBtn').attr("class", "php btn btn-large btn-block btn-danger cboxElement");   
+                        }else{
+                            $('#messagesBtn').attr("class", "php btn btn-large btn-block cboxElement");
+                        }
+                    }
+                });
+            }
+
+            function displayGossip()
+            {
+                var postText = encodeURIComponent($('#inputNewPost').val());
+
+                $.ajax({
+                    type: "POST",
+                    url: "postGossip.php",
+                    data: "gossip="+postText,
+                    success: function(gossips){
+                        $('#gossipTableBody').prepend($.trim(gossips));
+                        $('#inputNewPost').val("");
+                    }
+                });
+            }
+
+    </script>
+</head>
+
+<body>
+    
+    <div class="container-fluid">
+    <div class="row-fluid">
+
+        <div class="btn-group btn-group-vertical span3 hero-unit ">
+            <a class="btn btn-large" href="logout.php"> [content.homepage-logout] </a>
+            <p style="font-weight: bold">[content.homepage-welcome] [variables.username]</p>    
+            <a id="messagesBtn" class="php btn btn-large btn-block" href="messages.php"><i class = "icon-comment icon-white"></i> [content.homepage-messages] </a>
+            <a class="php btn btn-large btn-block" href="people.php"><i class = "icon-user icon-white"></i> [content.homepage-friends] </a>
+            <a class="btn btn-large btn-block" href="templates/uploads.html"><i class = "icon-camera icon-white"></i> [content.homepage-pics] </a>
+                
+        </div>
+    
+        <div class="hero-unit span4 centering well">
+            <div class="control-group">
+                <span class="label label-info control-label">[content.homepage-newPost]</span>
+                <div class="controls">
+                    
+                    <textarea style="width: 100%" rows="8" type="text" id="inputNewPost" name="inputNewPost" placeholder="[content.homepage-newPostPlaceholder]"></textarea>
+
+                    <a id="submitGossipButton" class="btn btn-small btn-block" onclick="displayGossip()"><i class = "icon-comment icon-white"></i> [content.homepage-postGossip] </a>
+                    
+                </div>
+            </div>
+        </div>
+    
+        <div class="hero-unit span5 centering well">
+            <div class="control-group">
+                <div class="controls">
+                    <table class="table" style="font-family: cursive">
+                        <caption style="font-weight: 900; font-size: x-large">[content.homepage-newsFeed]</caption>
+                        <thead>
+                            <tr>
+                                <th>Gossip</th>
+                                <th>From</th>    
+                            </tr>
+                            
+                        </thead>
+                        <tbody id="gossipTableBody">
+                            [variables.gossipTableBody]
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    
+</body>
+</html>

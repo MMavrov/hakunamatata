@@ -1,0 +1,13 @@
+<?php 
+// Connects to Our Database
+
+	// Initialize connection variables
+	$host     = 'localhost';
+	$username = 'DeltaEpsilon';
+	$password = 'd2012e4GKMV';
+	$database = 'DEMain';
+
+	// Connect to Database
+	$pdo = new PDO("mysql:host=$host;dbname=$database", $username, $password);
+
+?> 
