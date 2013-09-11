@@ -1,4 +1,5 @@
-Germil
-======
+A web project of Social Network. 
 
-PHP project
+Have implemented database connectivity, user messages, friendship, newsfeed, file upload.
+
+Using external libraries: Bootstrap, Colorbox.
